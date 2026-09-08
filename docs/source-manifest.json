@@ -1,0 +1,37 @@
+[
+  {
+    "source": "UpdateSlicePlane\\UpdateSlicePlane\\UpdateSlicePlane\\UpdateSlicePlane.py",
+    "destination": "UpdateSlicePlane/UpdateSlicePlane.py",
+    "source_sha256": "1044b1a1e60405d41f93f5fde0e70e00d26d50b1639810db2c66bdf49d819b82"
+  },
+  {
+    "source": "UpdateSlicePlane\\UpdateSlicePlane\\UpdateSlicePlane\\Resources\\Icons\\UpdateSlicePlane.png",
+    "destination": "UpdateSlicePlane/Resources/Icons/UpdateSlicePlane.png",
+    "source_sha256": "f67298b572228d0a0456331cd015dfe6427430b4f7be6bcb4aa7105b2ff21c19"
+  },
+  {
+    "source": "UpdateSlicePlane\\UpdateSlicePlane\\UpdateSlicePlane\\Resources\\UI\\UpdateSlicePlane.ui",
+    "destination": "UpdateSlicePlane/Resources/UI/UpdateSlicePlane.ui",
+    "source_sha256": "3523b62a01cb8d903641d2894547d5bce19c56c2b37fb7a36d1fa0a995b4105c"
+  },
+  {
+    "source": "VXMController\\VXMController\\VXMController\\VXMController.py",
+    "destination": "VXMController/VXMController.py",
+    "source_sha256": "3d93239cb158c9a1403eec80b4022136499174d11b336e2f2cff653fa243c337"
+  },
+  {
+    "source": "VXMController\\VXMController\\VXMController\\Resources\\Icons\\VXMController.png",
+    "destination": "VXMController/Resources/Icons/VXMController.png",
+    "source_sha256": "f67298b572228d0a0456331cd015dfe6427430b4f7be6bcb4aa7105b2ff21c19"
+  },
+  {
+    "source": "VXMController\\VXMController\\VXMController\\Resources\\UI\\VXMController.ui",
+    "destination": "VXMController/Resources/UI/VXMController.ui",
+    "source_sha256": "97734c5357e0c3a1e795e9b5e1ba1b8d3e37aefcdda9aa5ff0011f6f1d3dcdc1"
+  },
+  {
+    "source": "VXMController\\VXMController\\VXMController\\Submodule\\Oscilloscope.py",
+    "destination": "VXMController/Submodule/Oscilloscope.py",
+    "source_sha256": "0407465f75f91725ac8118cb9880d327c13ceaf5b8877c4f13b6ecaf0d12bf79"
+  }
+]
