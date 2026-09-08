@@ -1,0 +1,122 @@
+[
+  {
+    "file": "docs/figures/tracking-apparatus.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 38,
+    "source_part": "ppt/media/image88.png",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "d93632dd2936c0a7a2352f134fc29dca61454d613009ba1cfedc393ce214655a"
+  },
+  {
+    "file": "docs/figures/slice-navigation.png",
+    "source_deck": "알키미스트 0119.pptx",
+    "slide": 7,
+    "source_part": "ppt/media/image12.png",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "cf087b0d47478b3bb7eeb5b13afe4ebcb63c91ff0a5ed2c411c7e46a387d443a"
+  },
+  {
+    "file": "docs/figures/scan-grid-3d.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 30,
+    "source_part": "ppt/media/image72.png",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "803d08dd0363867ce1fee7a823b20440529d369f96a6a9e50cb077eb1b26d242"
+  },
+  {
+    "file": "docs/figures/scan-coverage-2d.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 33,
+    "source_part": "ppt/media/image80.png",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "679fc5bb5105c947f84120293638e665f20466e1b3d294fed733f36deb274429"
+  },
+  {
+    "file": "docs/figures/scan-map-2d.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 34,
+    "source_part": "ppt/media/image81.png",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "fd6ea5f2c4b69b8e52c88e9f0a0133d38ad588da35ef0c7804dbec5e848e5580"
+  },
+  {
+    "file": "docs/figures/waveform-example.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 34,
+    "source_part": "ppt/media/image83.png",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "57a6ff60835d8c402eceeb1d3020b436844d478d715448152b6d9ccfb7e8fc9c"
+  },
+  {
+    "file": "docs/figures/scan-layer-visibility.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 36,
+    "source_part": "ppt/media/image86.png",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "d4c672e9d4022ced20286432481c54dc74f0e660e93e29a23c7a37dfa9a846e3"
+  },
+  {
+    "file": "docs/figures/eeg-fus-phantom.jpg",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 5,
+    "source_part": "ppt/media/image9.jpg",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "78c4d3cb11613e98ca898f7e2300ed4b6dbc97729b9e0b2f0f1c93613ced49ed"
+  },
+  {
+    "file": "docs/figures/eeg-control-spectrum.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 7,
+    "source_part": "ppt/media/image12.PNG",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "178d841a70855a4523488862fc137a2b2142254ae9a3669bad7e765b4d97afee"
+  },
+  {
+    "file": "docs/figures/eeg-fus-spectrum.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 7,
+    "source_part": "ppt/media/image13.PNG",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "abb8a68fbde758e3ecea956595488f1cf1f11cdc10fe0932cb19def301bf00b4"
+  },
+  {
+    "file": "docs/figures/navigation-coordinate-frames.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 18,
+    "source_part": "ppt/slides/slide18.xml",
+    "method": "Full slide rendered from original PPTX with artifact-tool; no content edits",
+    "sha256": "b89095f77bf2355ae31755a02f5aca765433c52c44945e2dae2036ec8323c759"
+  },
+  {
+    "file": "docs/figures/scan-timing-comparison.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 27,
+    "source_part": "ppt/slides/slide27.xml",
+    "method": "Full slide rendered from original PPTX with artifact-tool; no content edits",
+    "sha256": "661c4d17030b0435050f9e87b7fa457d49a187a85e9a15ada9c2a2647c1dcdff"
+  },
+  {
+    "file": "docs/figures/vxm-interface.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 26,
+    "source_part": "ppt/media/image69.png",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "34d91a5ee62a71e7baecbb47706e9508e5e15ebe2a116537d85fbc7a7a8d001c"
+  },
+  {
+    "file": "docs/figures/fiducial-controls.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 30,
+    "source_part": "ppt/media/image73.png",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "bad13a47660c7718911c44d9035beda052e400613aff477bb89c2d12a837dba9"
+  },
+  {
+    "file": "docs/figures/acquired-waveform.png",
+    "source_deck": "알키미스트 0225.pptx",
+    "slide": 34,
+    "source_part": "ppt/media/image82.png",
+    "method": "Original embedded image, byte-for-byte extraction",
+    "sha256": "faf5d53d344794d1b08c3020f84d06ea986a938abb4b67f852a16f5e79c48669"
+  }
+]

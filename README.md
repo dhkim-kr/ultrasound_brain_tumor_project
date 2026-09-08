@@ -1,48 +1,105 @@
 # Ultrasound Brain Tumor Project
 
-**3D Slicer modules for tracked slice navigation, Velmex stage control and ultrasound waveform acquisition.**
+**Optical navigation, tracked slice control and spatial ultrasound scanning in 3D Slicer.**
 
-Software developed during a KIST internship, with implementation evidence from the February 2021 project presentation. The repository name follows the internship project designation; the released code implements navigation and scanning infrastructure. Tumor segmentation, treatment planning and a tumor-classification model are not part of this source release.
+KIST internship software with project demonstrations documented in January and February 2021. The two released modules connect tracked coordinates to anatomical slice views and combine Velmex stage motion with oscilloscope acquisition. The figures below come from the original internship presentations.
 
-![VXM Controller interface from the project presentation](docs/figures/vxm-interface.png)
+| Tracking and acquisition apparatus | 3D scan in Slicer |
+|:---:|:---:|
+| <img src="docs/figures/tracking-apparatus.png" alt="Optical tracker, Velmex stage, water tank and control computer" width="420"> | <img src="docs/figures/scan-grid-3d.png" alt="7 by 7 by 7 scan positions with blue scan fiducials and a red maximum-point marker" width="420"> |
+| Optical tracker, stage, water tank and control computer. February presentation, slide 38. | 7 × 7 × 7 scan grid. Blue markers record sample positions; the red marker identifies the selected maximum. February presentation, slide 30. |
 
-*Historical VXM interface, 3D Slicer 4.11.20200930. Source: `알키미스트 0225.pptx`, slide 26. The supplied source also includes 3D scanning and maximum-point search controls.*
+The release covers the navigation and scanning components of the internship project. Its scope and hardware limitations are documented in [release notes](docs/release-notes.md).
 
-## System
+## Optical navigation and coordinate registration
 
-```mermaid
-flowchart LR
-    A["Tracker / PLUS<br/>StylusTipToReference"] --> B["UpdateSlicePlane<br/>ReferenceToRAS transform"]
-    B --> C["3D Slicer<br/>XY / XZ / YZ slice positions"]
-    D["VXM Controller UI<br/>axis, range, step size"] --> E["Velmex VXM<br/>serial connection"]
-    E --> F["Spatial scan position"]
-    G["Oscilloscope<br/>PyVISA waveform acquisition"] --> H["Signal maximum<br/>and scan samples"]
-    F --> H
-    H --> I["Slicer fiducials<br/>and NumPy scan output"]
+![Original coordinate-frame diagram connecting tracker, stylus, reference and RAS](docs/figures/navigation-coordinate-frames.png)
+
+*Original coordinate-frame diagram, February presentation, slide 18; also described in the January presentation, slide 4.*
+
+Tracking and image coordinates meet through `ReferenceToRAS`, obtained in the registration workflow. `UpdateSlicePlane` composes that matrix with `StylusTipToReference`:
+
+```text
+T_StylusTipToRAS = T_ReferenceToRAS @ T_StylusTipToReference
+slice position  = T_StylusTipToRAS[:3, 3]
 ```
 
-| Module | Implemented functions |
+The module reads the resulting translation and moves the Red/Green/Yellow slice planes along Z/Y/X, respectively. Registration supplies the input transform; it is not estimated by `UpdateSlicePlane` itself.
+
+The January presentation describes recording a stylus path over the forehead and nose, placing more than 40 fiducials, and registering them to the reconstructed surface. It reports the following example:
+
+| Registration method | Reported RMSE |
+|---|---:|
+| Landmark registration | 7.12 |
+| Surface registration | 0.57 |
+
+*January presentation, slides 9–12. The source slide does not state the RMSE unit or evaluation sample count; these values describe that demonstration only.*
+
+## Tracked slice control
+
+![UpdateSlicePlane interface with input transforms, orthogonal image planes and Apply, Auto, Stop and Reset controls](docs/figures/slice-navigation.png)
+
+*Implemented `UpdateSlicePlane` interface, January presentation, slide 7. This historical screenshot shows the anatomical views used in the module demonstration.*
+
+| Control | Behavior |
 |---|---|
-| `UpdateSlicePlane` | Apply transformed stylus-tip coordinates to orthogonal slices; automatic update; stop; reset |
-| `VXMController` | Signed X/Y/Z movement, adjustable step size, 1D/2D/3D scans, 2D/3D maximum-point searches |
-| Embedded `VelmexController` | Serial setup, step conversion, motor commands, motion timing and position bookkeeping |
-| `Submodule/Oscilloscope.py` | VISA connection, channel acquisition and waveform scaling |
+| **Apply** | Read the selected transforms and update all three slice positions once |
+| **Auto** | Observe changes to the stylus transform and update slice positions |
+| **Stop** | Remove the stylus-transform observer |
+| **Reset** | Restore the slice positions captured when the module opened |
 
-![Fiducial selectors](docs/figures/fiducial-controls.png)
+The module replaces manual slice placement with coordinates from the transform chain. The January slides identify manual clicking and fiducial placement as sources of positioning discrepancies; they do not provide a separate accuracy benchmark for the slice-control module.
 
-*Separate fiducial lists for sampled positions and maximum-signal positions; slide 30.*
+Implementation: [`UpdateSlicePlane.py`](UpdateSlicePlane/UpdateSlicePlane.py), methods `UpdateSlicePlane`, `onAutoButton`, `onStopButton` and `ResetSlicePlane`.
 
-## Project measurements
+## Spatial scanning and waveform acquisition
 
-| Demonstrated operation | Before | After | Context |
-|---|---:|---:|---|
-| Example scan sequence | 14.7 s | 4.4 s | Slide 27 reports approximately 3.3× speed improvement through step-size and wait-time changes |
+![VXM Controller interface showing axis motion and scan settings](docs/figures/vxm-interface.png)
 
-These are historical presentation values, not benchmarks rerun for this release. The implementation retains the original motor command and timing logic.
+*VXM interface, February presentation, slide 26. The final source additionally contains 3D scanning and maximum-point search controls.*
 
-![Example acquired waveform](docs/figures/acquired-waveform.png)
+| Component | Implemented functions |
+|---|---|
+| VXM GUI | Signed X/Y/Z motion, step-size and scan-range settings, 1D/2D/3D scans, 2D/3D maximum-point searches |
+| Embedded `VelmexController` | Serial setup, millimetre-to-step conversion, motor commands and position bookkeeping |
+| `Oscilloscope.py` | VISA connection, waveform acquisition and amplitude scaling |
+| Slicer fiducials | Sample-position markers, maximum-point marker and per-layer display lists |
 
-*Waveform plot from slide 34. No participant-level measurement files or medical-image scene files are included.*
+| 2D scan coverage | 2D scan visualization |
+|:---:|:---:|
+| <img src="docs/figures/scan-coverage-2d.png" alt="Slicer fiducial coverage from a 2D scan" width="420"> | <img src="docs/figures/scan-map-2d.png" alt="Original heatmap showing a high-amplitude band in the 2D scan" width="420"> |
+| Sample positions displayed in Slicer, February slide 33. | Plot shown with the 2D scan, February slide 34. The original axes have no physical units or colorbar. |
+
+The scan code records a waveform at each position. In 3D, the stored array has `[z, y, x, waveform_samples]` order. It takes the maximum waveform value at each grid location, locates the overall maximum and moves the stage to that position. This is a sample-amplitude criterion; the source does not convert it into calibrated acoustic pressure.
+
+![Example oscillatory waveform from the 2D scan presentation](docs/figures/waveform-example.png)
+
+*An acquired waveform example from February slide 34. The original plot uses sample indices and does not label physical units. The complete waveform pair and display-management screenshots are in the [figure guide](docs/figures.md).*
+
+Implementation: [`VXMController.py`](VXMController/VXMController.py), methods `TwoDScan`, `ThreeDScan`, `placeScanFiducial` and `placeMaxFiducial`; [`Oscilloscope.py`](VXMController/Submodule/Oscilloscope.py), `getData`.
+
+## Scan-time optimization
+
+![Original before-and-after stage motion and wait-time diagram](docs/figures/scan-timing-comparison.png)
+
+*Original motion and wait-time diagram, February presentation, slide 27.*
+
+| Example sequence | Reported timing | Total |
+|---|---|---:|
+| Before | 0.7 s × 21 | 14.7 s |
+| After | 0.7 s + 0.3 s × 8 + 1.3 s | 4.4 s |
+
+The presentation attributes the approximately **3.3×** speed improvement to step-size changes and shorter waits during the scan. These are historical demonstration timings. The preserved implementation uses a step-dependent `sleeptime` function; actual travel and settling times depend on the apparatus.
+
+## Additional internship experiments
+
+![Skull phantom, ultrasound transducer and EEG setup inside a shielding enclosure](docs/figures/eeg-fus-phantom.jpg)
+
+*EEG–FUS interference experiment in a shielding enclosure, February presentation, slide 5.*
+
+The presentations also document EEG–FUS interference checks with a skull phantom. The [figure guide](docs/figures.md#eegfus-interference-check) includes the original control/FUS spectra and the reported observation. This material provides experimental context; the EEG analysis implementation is not included in the two Slicer modules.
+
+All 15 figure assets have source slide numbers and extraction/rendering details in the [figure manifest](docs/figure-manifest.json). Embedded screenshots and plots retain their original pixels; the coordinate and timing diagrams are full-slide renders.
 
 ## Load in 3D Slicer
 

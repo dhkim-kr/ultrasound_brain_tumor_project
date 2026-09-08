@@ -28,4 +28,8 @@ Movement commands, scan loops, transform math and waveform interpretation are pr
 
 ## Figure provenance
 
-All figures are extracted without image modification from `알키미스트 0225.pptx`: interface (slide 26), fiducial controls (slide 30), acquired waveform (slide 34). The historical screenshot contains no patient image. Slide 27 supplies the reported scan-duration comparison. The full internal presentation and participant/medical-image figures are not redistributed.
+The README and figure guide use 15 assets from `알키미스트 0119.pptx` and `알키미스트 0225.pptx`. Thirteen embedded screenshots, plots and photographs are extracted byte for byte. Two diagrams (February slides 18 and 27) are full-slide renders preserving the original coordinate-frame and scan-timing content.
+
+Each asset is listed in `docs/figure-manifest.json` with its source slide, source ZIP part, extraction/rendering method and SHA-256 hash. The January slide 7 screenshot documents the anatomical views displayed by `UpdateSlicePlane`. The downloadable release does not include raw medical-image volumes, participant recordings or complete internal presentations.
+
+January slides 9–12 supply the registration description and demonstration RMSE values. February slides 5–7 supply the phantom EEG–FUS context, and slide 27 supplies the scan-duration comparison. These figures and numbers describe the original demonstrations, not new validation of the archived code. External literature illustrations and individual fMRI result tables from other slides are outside this figure selection.
